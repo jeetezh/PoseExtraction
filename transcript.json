@@ -1,0 +1,94 @@
+{
+  "segments": [
+    {
+      "line": "The video begins with a title slide displaying the word 'Demo' and an Oracle copyright notice.",
+      "start": 0.0,
+      "end": 3.3
+    },
+    {
+      "line": "The screen transitions to a Windows File Explorer window, showing the contents of a folder named 'public' located within a directory path that includes 'Oracle' and 'JDK'.",
+      "start": 3.3,
+      "end": 8.88
+    },
+    {
+      "line": "The user navigates through the folder structure, first showing the 'public' folder, then moving into a subfolder named 'en' for English, and finally into the 'script' folder.",
+      "start": 8.88,
+      "end": 14.46
+    },
+    {
+      "line": "The user opens a JavaScript file named 'table.js' located in the 'script' folder, revealing its code content.",
+      "start": 14.46,
+      "end": 17.97
+    },
+    {
+      "line": "The code in the 'table.js' file is displayed, showing a function named 'initialize' and other related functions, including 'initializeModel' and 'initializePresentationModel'.",
+      "start": 17.97,
+      "end": 22.31
+    },
+    {
+      "line": "The user switches to a web browser, opening the Oracle ADF (Application Development Framework) runtime environment, which displays a list of available files and resources.",
+      "start": 22.31,
+      "end": 27.47
+    },
+    {
+      "line": "Within the ADF runtime environment, the user navigates to the 'File' menu and selects 'New' to create a new file or resource.",
+      "start": 27.47,
+      "end": 32.02
+    },
+    {
+      "line": "The user selects 'New' from the 'File' menu, then chooses 'ADF Application' from the submenu to create a new application or component.",
+      "start": 32.02,
+      "end": 36.56
+    },
+    {
+      "line": "The user selects 'New' from the 'File' menu, then chooses 'ADF Application' from the submenu to create a new application or component.",
+      "start": 36.56,
+      "end": 41.1
+    },
+    {
+      "line": "The user selects 'New' from the 'File' menu, then chooses 'ADF Application' from the submenu to create a new application or component.",
+      "start": 41.1,
+      "end": 45.65
+    },
+    {
+      "line": "The user selects 'New' from the 'File' menu, then chooses 'ADF Application' from the submenu to create a new application or component.",
+      "start": 45.65,
+      "end": 50.19
+    },
+    {
+      "line": "The user selects 'New' from the 'File' menu, then chooses 'ADF Application' from the submenu to create a new application or component.",
+      "start": 50.19,
+      "end": 54.74
+    },
+    {
+      "line": "The user selects 'New' from the 'File' menu, then chooses 'ADF Application' from the submenu to create a new application or component.",
+      "start": 54.74,
+      "end": 59.28
+    },
+    {
+      "line": "The user selects 'New' from the 'File' menu, then chooses 'ADF Application' from the submenu to create a new application or component.",
+      "start": 59.28,
+      "end": 63.82
+    },
+    {
+      "line": "The user selects 'New' from the 'File' menu, then chooses 'ADF Application' from the submenu to create a new application or component.",
+      "start": 63.82,
+      "end": 68.37
+    },
+    {
+      "line": "The user selects 'New' from the 'File' menu, then chooses 'ADF Application' from the submenu to create a new application or component.",
+      "start": 68.37,
+      "end": 72.91
+    },
+    {
+      "line": "The user selects 'New' from the 'File' menu, then chooses 'ADF Application' from the submenu to create a new application or component.",
+      "start": 72.91,
+      "end": 77.46
+    },
+    {
+      "line": "The user selects 'New' from the 'File' menu, then chooses 'ADF Application' from the submenu to create a new application or component.",
+      "start": 77.46,
+      "end": 82.0
+    }
+  ]
+}
