@@ -1,0 +1,10 @@
+{
+  "segments": [
+    {
+      "line": "Let's check out the new loop iteration feature in Test Automation 25.12 or higher. Here we're on a 25.12 environment, brand new. In this release and later, Oracle has added two new keywords. We're on the release screen, so let's check out the keywords. Let's do a count. There are 70, so there are two more than before. Let's find them. They should have something to do with loop. Here they are. There's the Start Loop keyword. It has a help text that defines the start of the loop. You can optionally specify a variable to store the current iteration number on each run. Very important.",
+      "start": 0.0,
+      "end": 90.0,
+      "source": "script"
+    }
+  ]
+}
