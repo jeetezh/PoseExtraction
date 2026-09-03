@@ -22,6 +22,7 @@ Usage:
 """
 
 import os
+import re
 import sys
 import json
 import base64
@@ -58,10 +59,23 @@ def get_video_duration(video_path):
 # Prompt
 # ---------------------------------------------------------------------------
 
-def build_prompt(script_text):
+def count_script_sentences(script_text):
+    parts = re.split(r"[.!?]+", script_text)
+    return len([p for p in parts if p.strip()])
+
+
+def build_prompt(script_text, video_duration):
+    n_sentences = count_script_sentences(script_text)
+    # rough floor: at least one segment every ~5s of video, or one per
+    # script sentence, whichever is larger
+    min_segments = max(n_sentences, int(video_duration // 5))
+
     return f"""You are given a video and a PARTIAL narration script written by
 the user. The script may only cover SOME of what happens in the video - it
 might be shorter than the video, skip steps, or stop partway through.
+
+The video is exactly {video_duration:.1f} seconds long. Your output MUST
+account for the full {video_duration:.1f} seconds - do not stop early.
 
 Reference script (existing narration, use where it fits):
 \"\"\"
@@ -70,10 +84,9 @@ Reference script (existing narration, use where it fits):
 
 Do the following:
 1. Watch the ENTIRE video from start to finish and identify every distinct
-   step/moment/action shown.
+   step/moment/action shown, second by second if needed.
 2. For parts of the video that the reference script already describes,
-   reuse that wording (verbatim or lightly adapted to fit as a segment) -
-   do not rewrite content that's already covered well.
+   reuse that wording (verbatim or lightly adapted to fit as a segment).
 3. For parts of the video that the reference script does NOT cover (skipped
    steps, a shorter script than the video needs, or the video simply
    continuing past where the script ends), WRITE NEW narration segments in
@@ -82,6 +95,21 @@ Do the following:
 4. The result must be a single continuous narration that covers the ENTIRE
    video from beginning to end, combining reused script content and newly
    generated content seamlessly.
+
+CRITICAL SEGMENTATION RULES - failure to follow these makes the output unusable:
+- NEVER return the whole script (or large multi-sentence chunks of it) as a
+  single segment. Each segment should cover roughly ONE sentence, clause, or
+  short beat of narration - typically 2-8 seconds of video each.
+- You MUST return at least {min_segments} segments total for this video.
+- If the video shows content, actions, or screens the script never mentions
+  (including anything after the point where the script's content ends),
+  you MUST insert additional "generated" segments describing exactly what
+  is shown on screen at that time. Do not skip over unscripted portions of
+  the video - describe them.
+- Segments must jointly span from ~0s to ~{video_duration:.1f}s. Do not let
+  the last segment's "end" be far short of {video_duration:.1f}s.
+- Do not invent actions that are not visible in the video, and do not
+  compress multiple distinct on-screen actions into one segment.
 
 Return ONLY valid JSON, no markdown fences, no commentary, in this exact schema:
 
@@ -99,8 +127,8 @@ Rules:
   from) the reference script, or "generated" if you wrote it to fill a gap
   the script didn't cover.
 - Segments together must cover the whole video, from near 0 seconds to near
-  the end of the video - do not stop early just because the reference
-  script stopped early.
+  {video_duration:.1f} seconds - do not stop early just because the
+  reference script stopped early.
 """
 
 
@@ -108,7 +136,7 @@ Rules:
 # Call vLLM (native video input)
 # ---------------------------------------------------------------------------
 
-def expand_via_vllm(video_path, script_text):
+def expand_via_vllm(video_path, script_text, video_duration):
     client = OpenAI(base_url=BASE_URL, api_key="not-needed")
 
     with open(video_path, "rb") as f:
@@ -126,7 +154,7 @@ def expand_via_vllm(video_path, script_text):
                         "type": "video_url",
                         "video_url": {"url": f"data:video/{video_format};base64,{video_b64}"},
                     },
-                    {"type": "text", "text": build_prompt(script_text)},
+                    {"type": "text", "text": build_prompt(script_text, video_duration)},
                 ],
             }
         ],
@@ -186,12 +214,42 @@ def redistribute_by_word_count(result, target_duration, min_seg_seconds=0.8):
     return result
 
 
-def validate_segments(result):
+def validate_segments(result, script_text=None, video_duration=None):
+    segments = result["segments"]
+
+    if len(segments) <= 1:
+        raise ValueError(
+            "Model returned only one segment - it likely just echoed the "
+            "script instead of expanding it. Try re-running; consider "
+            "lowering temperature or strengthening the prompt further."
+        )
+
+    if script_text is not None:
+        n_sentences = count_script_sentences(script_text)
+        if len(segments) < n_sentences:
+            print(
+                f"Warning: got {len(segments)} segments but the script has "
+                f"~{n_sentences} sentences - model may have merged content "
+                f"that should've stayed split.",
+                file=sys.stderr,
+            )
+
+    if video_duration is not None:
+        last_end = segments[-1]["end"]
+        if last_end < video_duration * 0.9:
+            print(
+                f"Warning: last segment ends at {last_end:.1f}s but video is "
+                f"{video_duration:.1f}s - model likely stopped early and did "
+                f"not cover the full video.",
+                file=sys.stderr,
+            )
+
     prev_end = 0.0
-    for seg in result["segments"]:
+    for seg in segments:
         if seg["start"] < prev_end - 0.5:
             raise ValueError(f"Out-of-order segment: {seg}")
         prev_end = seg["end"]
+
     return True
 
 
@@ -225,16 +283,20 @@ def main():
     print(f"Video duration: {video_duration:.2f}s", file=sys.stderr)
     print(f"Expanding '{args.script}' to cover '{args.video}' via {MODEL} @ {BASE_URL} ...", file=sys.stderr)
 
-    result = expand_via_vllm(args.video, script_text)
-    validate_segments(result)
+    result = expand_via_vllm(args.video, script_text, video_duration)
+    validate_segments(result, script_text=script_text, video_duration=video_duration)
 
     sources = [seg.get("source", "unknown") for seg in result["segments"]]
     n_script = sources.count("script")
     n_generated = sources.count("generated")
-    print(f"Segments from your script: {n_script}, newly generated: {n_generated}", file=sys.stderr)
+    print(
+        f"Segments: {len(result['segments'])} total "
+        f"({n_script} from your script, {n_generated} newly generated)",
+        file=sys.stderr,
+    )
 
     result = redistribute_by_word_count(result, video_duration)
-    validate_segments(result)
+    validate_segments(result, script_text=script_text, video_duration=video_duration)
     print(f"Timed to span 0.00s - {result['segments'][-1]['end']:.2f}s", file=sys.stderr)
 
     output_json = json.dumps(result, indent=2)

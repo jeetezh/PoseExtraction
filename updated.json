@@ -1,0 +1,64 @@
+{
+  "segments": [
+    {
+      "line": "Let's check out the new loop iteration feature in Test Automation 25.12 or higher. Here we're on a 25.12 environment, brand new.",
+      "start": 0.0,
+      "end": 12.38,
+      "source": "script"
+    },
+    {
+      "line": "In this release and later, Oracle has added two new keywords. We're on the release screen, so let's check out the keywords.",
+      "start": 12.38,
+      "end": 24.75,
+      "source": "script"
+    },
+    {
+      "line": "Let's do a count. There are 70, so there are two more than before.",
+      "start": 24.75,
+      "end": 32.62,
+      "source": "script"
+    },
+    {
+      "line": "Let's find them. They should have something to do with loop. Here they are.",
+      "start": 32.62,
+      "end": 40.5,
+      "source": "script"
+    },
+    {
+      "line": "There's the Start Loop keyword. It has a help text that defines the start of the loop.",
+      "start": 40.5,
+      "end": 50.06,
+      "source": "script"
+    },
+    {
+      "line": "You can optionally specify a variable to store the current iteration number on each run. Very important.",
+      "start": 50.06,
+      "end": 59.62,
+      "source": "script"
+    },
+    {
+      "line": "The user navigates to the 'Technical Support' section to view system information.",
+      "start": 59.62,
+      "end": 66.38,
+      "source": "generated"
+    },
+    {
+      "line": "The system information panel displays details like Application Version, Host OS, and Database Version.",
+      "start": 66.38,
+      "end": 74.25,
+      "source": "generated"
+    },
+    {
+      "line": "The user closes the 'Technical Support' panel and returns to the main test screen.",
+      "start": 74.25,
+      "end": 82.12,
+      "source": "generated"
+    },
+    {
+      "line": "The user clicks the 'Keywords' tab to view the list of available automation keywords.",
+      "start": 82.12,
+      "end": 90.0,
+      "source": "generated"
+    }
+  ]
+}
