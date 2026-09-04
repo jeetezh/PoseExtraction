@@ -1,0 +1,64 @@
+{
+  "segments": [
+    {
+      "line": "So let's check out the new loop or iteration feature in Cable Test Automation 25.12 or higher. So here I'm on a Cable 25.12 environment brand new.",
+      "start": 0.0,
+      "end": 9.31,
+      "source": "script"
+    },
+    {
+      "line": "And in this release and later of course Oracle has added two new keywords. So we are on the release screen and let's check out the keywords.",
+      "start": 9.31,
+      "end": 18.62,
+      "source": "script"
+    },
+    {
+      "line": "And let's just do account. So here are 70. So there are two more than before.",
+      "start": 18.62,
+      "end": 24.14,
+      "source": "script"
+    },
+    {
+      "line": "And let's find them. Should something with loop. Here they are.",
+      "start": 24.14,
+      "end": 27.93,
+      "source": "script"
+    },
+    {
+      "line": "So there's the start loop. And has a help text of course defines the start of the loop. Optionally specify a variable to store the current iteration number on each run. Very important.",
+      "start": 27.93,
+      "end": 39.31,
+      "source": "script"
+    },
+    {
+      "line": "And then the end loop defines the end of the loop.",
+      "start": 39.31,
+      "end": 43.1,
+      "source": "script"
+    },
+    {
+      "line": "So we can see the keywords are now visible in the keyword tab.",
+      "start": 43.1,
+      "end": 47.59,
+      "source": "generated"
+    },
+    {
+      "line": "The user types 'loop' into the search bar to filter the keyword list.",
+      "start": 47.59,
+      "end": 52.07,
+      "source": "generated"
+    },
+    {
+      "line": "The filtered results show 'Start Loop' and 'End Loop' keywords.",
+      "start": 52.07,
+      "end": 55.52,
+      "source": "generated"
+    },
+    {
+      "line": "The user hovers over the 'Start Loop' keyword to view its help text.",
+      "start": 55.52,
+      "end": 60.0,
+      "source": "generated"
+    }
+  ]
+}
