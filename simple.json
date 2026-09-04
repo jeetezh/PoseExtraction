@@ -1,0 +1,49 @@
+{
+  "segments": [
+    {
+      "line": "So let's check out the new loop or iteration feature in Cable Test Automation 25.12 or higher.",
+      "start": 0,
+      "end": 7
+    },
+    {
+      "line": "So here I'm on a Cable 25.12 environment brand new.",
+      "start": 7,
+      "end": 13
+    },
+    {
+      "line": "And in this release and later of course Oracle has added two new keywords.",
+      "start": 13,
+      "end": 19
+    },
+    {
+      "line": "So we are on the release screen and let's check out the keywords.",
+      "start": 19,
+      "end": 25
+    },
+    {
+      "line": "And let's just do account. So here are 70. So there are two more than before.",
+      "start": 25,
+      "end": 32
+    },
+    {
+      "line": "And let's find them. Should something with loop. Here they are.",
+      "start": 32,
+      "end": 38
+    },
+    {
+      "line": "So there's the start loop. And has a help text of course defines the start of the loop.",
+      "start": 38,
+      "end": 45
+    },
+    {
+      "line": "Optionally specify a variable to store the current iteration number on each run.",
+      "start": 45,
+      "end": 52
+    },
+    {
+      "line": "Very important. And then the end loop defines the end of the loop.",
+      "start": 52,
+      "end": 59
+    }
+  ]
+}
