@@ -1,0 +1,52 @@
+{
+  "segments": [
+    {
+      "line": "So, this is the workspace. Here we will create a new workspace.",
+      "start": 0.0,
+      "end": 6.86,
+      "source": "script"
+    },
+    {
+      "line": "See, in workspace I am going to create workspace. We are passing some workspace name like version V2 and just parting.",
+      "start": 6.86,
+      "end": 18.86,
+      "source": "script"
+    },
+    {
+      "line": "In parent workspace we have to keep in inside the intest 1.0.",
+      "start": 18.86,
+      "end": 25.71,
+      "source": "script"
+    },
+    {
+      "line": "In description you pass anything.",
+      "start": 25.71,
+      "end": 28.57,
+      "source": "script"
+    },
+    {
+      "line": "See, my workspace is created. This is the right. No, I am created. I am just opening that.",
+      "start": 28.57,
+      "end": 38.86,
+      "source": "script"
+    },
+    {
+      "line": "We are in V2 versions. Whatever I create now right now.",
+      "start": 38.86,
+      "end": 45.14,
+      "source": "script"
+    },
+    {
+      "line": "The user clicks on the 'Create Workspace' option from the 'Workspace' menu.",
+      "start": 45.14,
+      "end": 52.0,
+      "source": "generated"
+    },
+    {
+      "line": "The 'Create Workspace' dialog appears, prompting for a workspace name, parent workspace, and version.",
+      "start": 52.0,
+      "end": 60.0,
+      "source": "generated"
+    }
+  ]
+}
