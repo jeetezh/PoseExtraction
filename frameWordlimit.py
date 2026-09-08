@@ -140,8 +140,25 @@ Do the following:
    reuse that wording (verbatim or lightly adapted to fit as a segment).
 3. For parts of the video that the reference script does NOT cover (skipped
    steps, or the video continuing past where the script ends), WRITE NEW
-   narration segments in the same tone/style as the reference script,
-   describing what's actually shown in the relevant frame(s).
+   narration segments describing what's actually shown in the relevant
+   frame(s).
+
+   STYLE MATCHING FOR GENERATED SEGMENTS (read this carefully - this is
+   where generated segments most often go wrong):
+   - Look at HOW the reference script talks, not just what it says. Match
+     its person (first-person "I", direct-address "see", etc. - whatever
+     the script actually uses), its tense, its casualness, and its
+     sentence length.
+   - Do NOT switch into a formal, third-person, documentation-style voice
+     (e.g. "The user then navigates to...", "This action results in...").
+     That register is both tonally inconsistent with the script AND
+     produces long sentences that don't fit short time slots.
+   - Prefer short, plain, spoken-style phrasing over technically complete
+     descriptions. A generated line should sound like something the same
+     narrator casually said in passing, not a formal changelog entry.
+   - When in doubt, write the generated line SHORTER and simpler, even if
+     it describes the frame less exhaustively - brevity that fits the
+     time slot naturally is more important than descriptive completeness.
 4. The result must be a single continuous narration that covers the ENTIRE
    video from beginning to end.
 
@@ -181,6 +198,12 @@ natural - follow it closely):
   rather than forcing sentences to flex to match fixed boundaries. This
   keeps the spoken pace even across the whole video with no artificial
   speeding up or slowing down.
+- This especially applies to GENERATED segments: since there's no existing
+  script wording to anchor their length, it's easy to over-describe a
+  frame in a long sentence. Write the shortest natural sentence that
+  conveys the action, matching the script's casual style, THEN pick
+  boundaries that fit that sentence at a natural pace - don't write first
+  and let length balloon to fill an available time gap.
 
 Return ONLY valid JSON, no markdown fences, no commentary, in this exact schema:
 
@@ -234,6 +257,76 @@ def parse_model_json(raw_text):
 # Safety net: snap any returned start/end to the nearest ACTUAL frame
 # timestamp, in case the model drifts from the provided list anyway.
 # ---------------------------------------------------------------------------
+
+def redistribute_boundaries_to_frames(result, frame_timestamps, words_per_second=2.5):
+    """
+    Leaves every segment's "line" text exactly as the model wrote it, but
+    recomputes "start"/"end" purely from word count, snapped to real frame
+    timestamps. This is what actually guarantees near-constant words/sec -
+    relying on the model to self-check that arithmetic in the prompt is not
+    reliable enough on its own (small/medium models especially).
+
+    How it works:
+      1. Each segment gets an "ideal" duration = word_count / words_per_second.
+      2. Those ideal durations are scaled so they sum exactly to the total
+         available span (first frame timestamp -> last frame timestamp).
+      3. Each resulting boundary is snapped to the nearest ACTUAL frame
+         timestamp, strictly after the previous boundary.
+
+    Limitation: if you have very few sampled frames (large --interval)
+    relative to the number of segments, boundaries can collapse (not enough
+    distinct timestamps to place them). This prints a warning - the fix is
+    to lower --interval, not to change the text.
+    """
+    segments = result["segments"]
+    if not segments:
+        return result
+
+    frame_timestamps = sorted(set(frame_timestamps))
+    first_ts = frame_timestamps[0]
+    last_ts = frame_timestamps[-1]
+    total_span = last_ts - first_ts
+
+    word_counts = [max(len(seg["line"].split()), 1) for seg in segments]
+    ideal_durations = [wc / words_per_second for wc in word_counts]
+    total_ideal = sum(ideal_durations)
+    if total_ideal <= 0 or total_span <= 0:
+        return result
+    scale = total_span / total_ideal
+
+    raw_boundaries = [first_ts]
+    cursor = first_ts
+    for d in ideal_durations:
+        cursor += d * scale
+        raw_boundaries.append(cursor)
+    raw_boundaries[-1] = last_ts
+
+    snapped = [first_ts]
+    for b in raw_boundaries[1:-1]:
+        candidates = [t for t in frame_timestamps if t > snapped[-1]]
+        if not candidates:
+            snapped.append(snapped[-1])  # will collapse - flagged below
+            continue
+        snapped.append(min(candidates, key=lambda t: abs(t - b)))
+    snapped.append(last_ts)
+
+    collapsed = 0
+    for i, seg in enumerate(segments):
+        seg["start"] = round(snapped[i], 2)
+        seg["end"] = round(snapped[i + 1], 2)
+        if seg["end"] <= seg["start"]:
+            collapsed += 1
+
+    if collapsed:
+        print(
+            f"Warning: {collapsed} segment(s) collapsed to zero/negative duration - "
+            f"not enough distinct frame timestamps to place all boundaries. "
+            f"Lower --interval to sample more frames, or reduce segment count.",
+            file=sys.stderr,
+        )
+
+    return result
+
 
 def snap_to_frame_timestamps(result, frame_timestamps: List[float]):
     def nearest(t):
@@ -329,6 +422,7 @@ def main():
     parser.add_argument("--interval", type=float, default=2.0, help="Seconds between sampled frames")
     parser.add_argument("--wps", type=float, default=2.5, help="Target natural speaking pace in words/second (default: 2.5)")
     parser.add_argument("--wps-tolerance", type=float, default=0.3, help="Allowed fractional deviation from --wps, e.g. 0.3 = +/-30%% (default: 0.3)")
+    parser.add_argument("--no-rebalance", action="store_true", help="Disable automatic boundary rebalancing by word count (rebalancing is ON by default)")
     parser.add_argument("--out", default=None, help="Optional path to write the JSON transcript to")
     args = parser.parse_args()
 
@@ -356,7 +450,10 @@ def main():
         result = expand_via_frames(frames, script_text, video_duration, words_per_second=args.wps)
         frame_timestamps = [f.timestamp for f in frames]
 
-    result = snap_to_frame_timestamps(result, frame_timestamps)
+    if args.no_rebalance:
+        result = snap_to_frame_timestamps(result, frame_timestamps)
+    else:
+        result = redistribute_boundaries_to_frames(result, frame_timestamps, words_per_second=args.wps)
     validate_segments(result, script_text=script_text, video_duration=video_duration)
     check_pacing(result, words_per_second=args.wps, wps_tolerance=args.wps_tolerance)
 

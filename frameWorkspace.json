@@ -3,54 +3,174 @@
     {
       "line": "So, this is the workspace. Here we will create a new workspace.",
       "start": 0.0,
-      "end": 10.0,
+      "end": 4.0,
       "source": "script"
     },
     {
-      "line": "See, in workspace I am going to create workspace. We are passing some workspace name like version V2 and just parting.",
-      "start": 10.0,
-      "end": 20.0,
+      "line": "See, in workspace I am going to create workspace.",
+      "start": 4.0,
+      "end": 6.0,
+      "source": "script"
+    },
+    {
+      "line": "We are passing some workspace name like version V2 and just parting.",
+      "start": 6.0,
+      "end": 8.0,
       "source": "script"
     },
     {
       "line": "In parent workspace we have to keep in inside the intest 1.0.",
-      "start": 20.0,
-      "end": 26.0,
+      "start": 8.0,
+      "end": 12.0,
       "source": "script"
     },
     {
       "line": "In description you pass anything.",
-      "start": 26.0,
-      "end": 30.0,
+      "start": 12.0,
+      "end": 14.0,
       "source": "script"
     },
     {
-      "line": "See, my workspace is created. This is the right. No, I am created. I am just opening that.",
-      "start": 30.0,
-      "end": 38.0,
+      "line": "See, my workspace is created.",
+      "start": 14.0,
+      "end": 16.0,
+      "source": "script"
+    },
+    {
+      "line": "This is the right. No, I am created. I am just opening that.",
+      "start": 16.0,
+      "end": 18.0,
       "source": "script"
     },
     {
       "line": "We are in V2 versions. Whatever I create now right now.",
-      "start": 38.0,
-      "end": 46.0,
+      "start": 18.0,
+      "end": 20.0,
       "source": "script"
     },
     {
-      "line": "See, the new workspace 'dev_rohit_v2' is now visible under the 'int_test_01' parent workspace.",
+      "line": "I am typing the workspace name as dev_rohit_v2.",
+      "start": 20.0,
+      "end": 22.0,
+      "source": "generated"
+    },
+    {
+      "line": "I am changing the parent workspace to int_test_01.",
+      "start": 22.0,
+      "end": 24.0,
+      "source": "generated"
+    },
+    {
+      "line": "I am setting the parent workspace version to 2.",
+      "start": 24.0,
+      "end": 26.0,
+      "source": "generated"
+    },
+    {
+      "line": "I am adding a description: rohit_v2.",
+      "start": 26.0,
+      "end": 28.0,
+      "source": "generated"
+    },
+    {
+      "line": "I am clicking OK to create the workspace.",
+      "start": 28.0,
+      "end": 30.0,
+      "source": "generated"
+    },
+    {
+      "line": "See, my workspace is created.",
+      "start": 30.0,
+      "end": 32.0,
+      "source": "script"
+    },
+    {
+      "line": "This is the right. No, I am created. I am just opening that.",
+      "start": 32.0,
+      "end": 34.0,
+      "source": "script"
+    },
+    {
+      "line": "We are in V2 versions. Whatever I create now right now.",
+      "start": 34.0,
+      "end": 38.0,
+      "source": "script"
+    },
+    {
+      "line": "I am right-clicking on the dev_rohit_v2 workspace.",
+      "start": 38.0,
+      "end": 40.0,
+      "source": "generated"
+    },
+    {
+      "line": "I am selecting the Open option.",
+      "start": 40.0,
+      "end": 42.0,
+      "source": "generated"
+    },
+    {
+      "line": "I am closing the workspace window.",
+      "start": 42.0,
+      "end": 44.0,
+      "source": "generated"
+    },
+    {
+      "line": "I am closing the workspace window.",
+      "start": 44.0,
+      "end": 46.0,
+      "source": "generated"
+    },
+    {
+      "line": "I am closing the workspace window.",
       "start": 46.0,
+      "end": 48.0,
+      "source": "generated"
+    },
+    {
+      "line": "I am closing the workspace window.",
+      "start": 48.0,
       "end": 50.0,
       "source": "generated"
     },
     {
-      "line": "The user then navigates to the 'Modified Objects' tab to view the workspace details.",
+      "line": "I am closing the workspace window.",
       "start": 50.0,
+      "end": 52.0,
+      "source": "generated"
+    },
+    {
+      "line": "I am closing the workspace window.",
+      "start": 52.0,
       "end": 54.0,
       "source": "generated"
     },
     {
-      "line": "Finally, the user closes the 'Modified Objects' window, concluding the workspace creation process.",
+      "line": "I am closing the workspace window.",
       "start": 54.0,
+      "end": 56.0,
+      "source": "generated"
+    },
+    {
+      "line": "I am closing the workspace window.",
+      "start": 56.0,
+      "end": 58.0,
+      "source": "generated"
+    },
+    {
+      "line": "I am closing the workspace window.",
+      "start": 58.0,
+      "end": 58.0,
+      "source": "generated"
+    },
+    {
+      "line": "I am closing the workspace window.",
+      "start": 58.0,
+      "end": 58.0,
+      "source": "generated"
+    },
+    {
+      "line": "I am closing the workspace window.",
+      "start": 58.0,
       "end": 58.0,
       "source": "generated"
     }
