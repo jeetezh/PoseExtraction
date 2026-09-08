@@ -1,0 +1,76 @@
+{
+  "segments": [
+    {
+      "line": "So, this is the workspace. Here we will create a new workspace.",
+      "start": 0.0,
+      "end": 4.0,
+      "source": "script"
+    },
+    {
+      "line": "See, in workspace I am going to create workspace. We are passing some workspace name like version V2 and just parting.",
+      "start": 4.0,
+      "end": 20.0,
+      "source": "script"
+    },
+    {
+      "line": "In parent workspace we have to keep in inside the intest 1.0.",
+      "start": 20.0,
+      "end": 26.0,
+      "source": "script"
+    },
+    {
+      "line": "In description you pass anything.",
+      "start": 26.0,
+      "end": 30.0,
+      "source": "script"
+    },
+    {
+      "line": "See, my workspace is created. This is the right. No, I am created. I am just opening that.",
+      "start": 30.0,
+      "end": 38.0,
+      "source": "script"
+    },
+    {
+      "line": "We are in V2 versions. Whatever I create now right now.",
+      "start": 38.0,
+      "end": 46.0,
+      "source": "script"
+    },
+    {
+      "line": "The user right-clicks on the newly created workspace 'dev_rohit_v2' in the Workspaces panel.",
+      "start": 46.0,
+      "end": 48.0,
+      "source": "generated"
+    },
+    {
+      "line": "The context menu appears with options like Open, Delete, Refresh, Docked, and Hide.",
+      "start": 48.0,
+      "end": 50.0,
+      "source": "generated"
+    },
+    {
+      "line": "The user clicks the 'Close' button on the 'Modified Objects' tab to exit the workspace view.",
+      "start": 50.0,
+      "end": 52.0,
+      "source": "generated"
+    },
+    {
+      "line": "The 'Modified Objects' window is minimized, leaving the main workspace view visible.",
+      "start": 52.0,
+      "end": 54.0,
+      "source": "generated"
+    },
+    {
+      "line": "The user clicks the 'Close' button on the 'Modified Objects' window to fully close it.",
+      "start": 54.0,
+      "end": 56.0,
+      "source": "generated"
+    },
+    {
+      "line": "The 'Modified Objects' window is completely closed, returning to the main application interface.",
+      "start": 56.0,
+      "end": 58.0,
+      "source": "generated"
+    }
+  ]
+}
