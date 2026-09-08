@@ -3,12 +3,12 @@
     {
       "line": "So, this is the workspace. Here we will create a new workspace.",
       "start": 0.0,
-      "end": 4.0,
+      "end": 10.0,
       "source": "script"
     },
     {
       "line": "See, in workspace I am going to create workspace. We are passing some workspace name like version V2 and just parting.",
-      "start": 4.0,
+      "start": 10.0,
       "end": 20.0,
       "source": "script"
     },
@@ -37,38 +37,14 @@
       "source": "script"
     },
     {
-      "line": "The user right-clicks on the newly created workspace 'dev_rohit_v2' in the Workspaces panel.",
+      "line": "See, I am just right-clicking on the newly created workspace to open its context menu.",
       "start": 46.0,
-      "end": 48.0,
-      "source": "generated"
-    },
-    {
-      "line": "The context menu appears with options like Open, Delete, Refresh, Docked, and Hide.",
-      "start": 48.0,
       "end": 50.0,
       "source": "generated"
     },
     {
-      "line": "The user clicks the 'Close' button on the 'Modified Objects' tab to exit the workspace view.",
+      "line": "I am going to close the workspace window now.",
       "start": 50.0,
-      "end": 52.0,
-      "source": "generated"
-    },
-    {
-      "line": "The 'Modified Objects' window is minimized, leaving the main workspace view visible.",
-      "start": 52.0,
-      "end": 54.0,
-      "source": "generated"
-    },
-    {
-      "line": "The user clicks the 'Close' button on the 'Modified Objects' window to fully close it.",
-      "start": 54.0,
-      "end": 56.0,
-      "source": "generated"
-    },
-    {
-      "line": "The 'Modified Objects' window is completely closed, returning to the main application interface.",
-      "start": 56.0,
       "end": 58.0,
       "source": "generated"
     }
